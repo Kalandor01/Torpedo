@@ -35,12 +35,15 @@ public class Torpedo
 
     public static void write(String[] board_p,String[] board_a)
     {
-        System.out.print("Játékos: ");
+        // System.out.print("Játékos: ");
+        // for(int x=0; x<BOARD_SIZE; x++)
+        //     System.out.print(board_p[x]);
+        // System.out.print("\nGép: ");
         for(int x=0; x<BOARD_SIZE; x++)
-            System.out.print(board_p[x]);
-        System.out.print("\nGép: ");
-        for(int x=0; x<BOARD_SIZE; x++)
-            System.out.print(board_a[x]);
+        {
+            System.out.print(EMPTY);
+            //System.out.print(board_a[x]);
+        }
         System.out.println();
     }
 
@@ -76,11 +79,15 @@ public class Torpedo
         System.out.println("Lőtt: " + (pos + 1));
         if(board[pos] == SHIP)
         {
+            // board[pos] = SHOT_SHIP;
+            // System.out.println("TALÁLT!");
+            // while(pos >= 0 && board[pos] == SHOT_SHIP)
+            //     pos--;
+            // pos++;
+            // while(pos < BOARD_SIZE && board[pos] == SHOT_SHIP)
+            //     pos++;
             board[pos] = SUNK;
-            System.out.println("TALÁLT!");
-            while(pos >= 0 && board[pos] == SUNK)
-                pos--;
-            System.out.println("ELSÜLJEDT!!!\n");
+            // System.out.println("ELSÜJEDT!!!\n");
         }
         else
             System.out.println("Nem talált.\n");
@@ -90,7 +97,7 @@ public class Torpedo
     public static boolean is_win(String[] board)
     {
         int x=0;
-        for(; x<BOARD_SIZE && board[x] == EMPTY; x++) {}
+        for(; x<BOARD_SIZE && (board[x] == EMPTY || board[x] == SUNK); x++) {}
         if(x>=BOARD_SIZE)
             return true;
         else
@@ -107,17 +114,17 @@ public class Torpedo
         String[] board_player = place_ship(board_base, ship_size);
         while(won == 0)
         {
+            // write(board_player, board_ai);
+            // board_player = move_ai(board_player);
+            // if(is_win(board_player))
+            //     won = -1;
             write(board_player, board_ai);
-            board_player = move_ai(board_player);
-            if(is_win(board_player))
-                won = -1;
-            write(board_player, board_ai);
-            if(won == 0)
-            {
+            // if(won == 0)
+            // {
                 board_ai = move_player(board_ai);
                 if(is_win(board_ai))
                     won = 1;
-            }
+            // }
         }
         write_won(won);
     }
