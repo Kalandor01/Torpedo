@@ -41,7 +41,10 @@ public class Torpedo
         // System.out.print("\nGép: ");
         for(int x=0; x<BOARD_SIZE; x++)
         {
-            System.out.print(EMPTY);
+            if(board_a[x] == SUNK)
+                System.out.print(SUNK);
+            else
+                System.out.print(EMPTY);
             //System.out.print(board_a[x]);
         }
         System.out.println();
@@ -80,7 +83,7 @@ public class Torpedo
         if(board[pos] == SHIP)
         {
             // board[pos] = SHOT_SHIP;
-            // System.out.println("TALÁLT!");
+            System.out.println("TALÁLT!");
             // while(pos >= 0 && board[pos] == SHOT_SHIP)
             //     pos--;
             // pos++;
