@@ -30,9 +30,10 @@ public class Torpedo
 
     public static void write(String[] board_p,String[] board_a)
     {
+        System.out.print("Játékos: ");
         for(int x=0; x<BOARD_SIZE; x++)
             System.out.print(board_p[x]);
-        System.out.println();
+        System.out.print("\nGép: ");
         for(int x=0; x<BOARD_SIZE; x++)
             System.out.print(board_a[x]);
         System.out.println();
@@ -48,14 +49,30 @@ public class Torpedo
 
     public static String[] move_player(String[] board)
     {
-        System.out.println("TEMPLATE");
+        int pos = -1;
+        while(!(pos >= 0 && pos < BOARD_SIZE))
+        {
+            System.out.print("Támadási hely: ");
+            pos = sc.nextInt() - 1;
+            if(!(pos >= 0 && pos < BOARD_SIZE))
+                System.out.println("Rossz!");
+        }
+        if(board[pos] == "#")
+            destroy_ship(board, pos);
         return board;
     }
 
     public static String[] move_ai(String[] board)
     {
-        System.out.println("TEMPLATE");
-        sc.next();
+        int pos = (int)(Math.random() * BOARD_SIZE);
+        if(board[pos] == "#")
+            board = destroy_ship(board, pos);
+        return board;
+    }
+    
+    public static String[] destroy_ship(String[] board, int pos)
+    {
+        board[pos] = "_";
         return board;
     }
 
@@ -80,14 +97,14 @@ public class Torpedo
         while(won == 0)
         {
             write(board_player, board_ai);
-            board_ai = move_player(board_ai);
-            if(is_win(board_ai))
+            board_player = move_ai(board_player);
+            if(is_win(board_player))
                 won = -1;
             write(board_player, board_ai);
             if(won == 0)
             {
-                board_player = move_ai(board_player);
-                if(is_win(board_player))
+                board_ai = move_player(board_ai);
+                if(is_win(board_ai))
                     won = 1;
             }
         }
