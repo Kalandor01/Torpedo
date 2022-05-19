@@ -6,10 +6,10 @@ Torpedó:
 	pálya = hajó elhelyez(pálya, hajó_méret)
 	Amíg nyert == 0:
 	
-kiir()	          // alapállapot
-		nyert = gép_lép()
-		kiir()                // alapállapot
-		Ha: nyert == 0
+kiir(pálya_játékos,pálya_gép)	          // Kiindulási helyzet
+		nyert = gép_lép()				  
+		kiir(pálya_játékos,pálya_gép)                // Kiindulási helyzet
+		Ha: nyert == 0		
 			nyert = játékos_lép()
 	nyertes_kiir()
 Program vége
@@ -31,6 +31,8 @@ hajó_elhelyez(pálya, hajó_méret)
 		pálya[pos] = „#”
 		pos:=pos+1
 	Ki: pálya
+	// 3. tábla létrehozása, hogy a játékos ne lőhesse ugyanazt a pozíciót
+
 Metódus vége
 
 
