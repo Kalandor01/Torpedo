@@ -8,12 +8,17 @@ public class Torpedo
     static Scanner sc = new Scanner(System.in);
 
     final static int BOARD_SIZE = 7;
+    final static String EMPTY = "_";
+    final static String SHIP = "#";
+    final static String SUNK = "-";
+    final static String SHOT_MISS = "V";
+    final static String SHOT_SHIP = "!";
 
     public static String[] make_board()
     {
         String[] board = new String[BOARD_SIZE];
         for(int x=0; x<BOARD_SIZE; x++)
-            board[x] = "_";
+            board[x] = EMPTY;
         return board;
     }
 	
@@ -23,7 +28,7 @@ public class Torpedo
         int pos = (int)(Math.random() * (BOARD_SIZE - ship_size));
         int max_place = pos + ship_size;
         for(; pos<max_place; pos++)
-            board[pos] = "#";
+            board[pos] = SHIP;
             pos++;
         return board;
     }
@@ -57,29 +62,35 @@ public class Torpedo
             if(!(pos >= 0 && pos < BOARD_SIZE))
                 System.out.println("Rossz!");
         }
-        if(board[pos] == "#")
-            destroy_ship(board, pos);
-        return board;
+        return destroy_ship(board, pos);
     }
 
     public static String[] move_ai(String[] board)
     {
         int pos = (int)(Math.random() * BOARD_SIZE);
-        if(board[pos] == "#")
-            board = destroy_ship(board, pos);
-        return board;
+        return destroy_ship(board, pos);
     }
     
     public static String[] destroy_ship(String[] board, int pos)
     {
-        board[pos] = "_";
+        System.out.println("Lőtt: " + (pos + 1));
+        if(board[pos] == SHIP)
+        {
+            board[pos] = SUNK;
+            System.out.println("TALÁLT!");
+            while(pos >= 0 && board[pos] == SUNK)
+                pos--;
+            System.out.println("ELSÜLJEDT!!!\n");
+        }
+        else
+            System.out.println("Nem talált.\n");
         return board;
     }
 
     public static boolean is_win(String[] board)
     {
         int x=0;
-        for(; x<BOARD_SIZE && board[x] == "_"; x++) {}
+        for(; x<BOARD_SIZE && board[x] == EMPTY; x++) {}
         if(x>=BOARD_SIZE)
             return true;
         else
