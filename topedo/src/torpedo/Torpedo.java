@@ -1,6 +1,11 @@
 package torpedo;
+
+import java.util.Scanner;
+
 public class Torpedo
 {
+
+    static Scanner sc = new Scanner(System.in);
 
     final static int BOARD_SIZE = 7;
 
@@ -30,6 +35,7 @@ public class Torpedo
         System.out.println();
         for(int x=0; x<BOARD_SIZE; x++)
             System.out.print(board_a[x]);
+        System.out.println();
     }
 
     public static void write_won(int won)
@@ -49,7 +55,18 @@ public class Torpedo
     public static String[] move_ai(String[] board)
     {
         System.out.println("TEMPLATE");
+        sc.next();
         return board;
+    }
+
+    public static boolean is_win(String[] board)
+    {
+        int x=0;
+        for(; x<BOARD_SIZE && board[x] == "_"; x++) {}
+        if(x>=BOARD_SIZE)
+            return true;
+        else
+            return false;
     }
 
 
@@ -64,9 +81,15 @@ public class Torpedo
         {
             write(board_player, board_ai);
             board_ai = move_player(board_ai);
+            if(is_win(board_ai))
+                won = -1;
             write(board_player, board_ai);
             if(won == 0)
+            {
                 board_player = move_ai(board_player);
+                if(is_win(board_player))
+                    won = 1;
+            }
         }
         write_won(won);
     }
