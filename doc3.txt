@@ -1,0 +1,16 @@
+
+ Default [Alapállapot / Játékkezdés]: Senki se nyert
+ Készítünk egy alaptáblát [ hajók nélkül ] 
+ Beállítjuk, hogy "3 mezőből [ részből]" álljon a hajó
+ Generálunk két külön táblát, amin van mindkét félnek egy hajója ( Ember / gép)
+Addig megyünk ( mennek a körök) ameddig senki se nyert.
+    Kiírjuk a táblákat
+    Gép  lő , megnézzük hogy talált-e vagy sem.
+    Megnézzük, hogy a gép nyert-e.
+    Hogyha nem nyert, akkor 
+    Kiírjuk a táblákat
+    Játékos  lő , megnézzük hogy talált-e vagy sem.
+    Ha 3x eltalálta a gép /  vagy a játékos az ellenfél hajóját, akkor kiíratjuk, 
+    hogy elsüllyesztetted az ellenfél hajóját!
+    Megnézzük, hogy a játékos nyert-e.
+Kiíratjuk a nyertest
